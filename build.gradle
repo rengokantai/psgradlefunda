@@ -4,6 +4,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.5
 
+def author = "yd"
 repositories {
     mavenCentral()
 }
@@ -18,7 +19,7 @@ task Task5 {
     dependsOn Task4     //Or Task5.dependsOn Task4
     doFirst { println "first" }
     description "desc"
-    doLast { println "last" }
+    doLast { println "$author" }
 }
 
 Task5.doFirst { println "override" }

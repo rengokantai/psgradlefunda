@@ -27,3 +27,26 @@ description "desc"
 doLast{println "last"}}
 
 task5.doFirst{print "override"}  //this will print first, override "first", then print first
+######seeting prop
+declare:
+```
+def var = "varname"
+//Or
+project.ext.var = "varname"
+```
+use:
+```
+println "$var"
+```
+#####task dep
+######basic dep
+```
+taskA dependsOn taskC, taskD
+```
+use ```gradle -q taskname```to quiet mode
+######
+mustRunAfter
+shouldRnnAfter   #ignore circular dependency.
+
+######
+a.finalizedBy b  // b must run after a
