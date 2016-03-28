@@ -11,8 +11,11 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
-task Task5 {
 
+task Task4
+Task4.doLast{println "task4"}       //can not write task Task4.doLast.....
+task Task5 {
+    dependsOn Task4     //Or Task5.dependsOn Task4
     doFirst { println "first" }
     description "desc"
     doLast { println "last" }
