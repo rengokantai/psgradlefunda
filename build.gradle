@@ -25,6 +25,17 @@ task Task5 {
 Task5.doFirst { println "override" }
 
 task copyfile(type:Copy){
+    exclude 'main/**/*.java'
     from 'src'
+    into 'dest'
+}
+
+//version 2 NOT WORKING.
+def contentSpec = copySpec {
+    exclude 'main'
+    from 'src'
+}
+task copyfile2(type:Copy){
+    with contentSpec
     into 'dest'
 }
