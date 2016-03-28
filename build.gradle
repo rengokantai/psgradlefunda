@@ -23,3 +23,8 @@ task Task5 {
 }
 
 Task5.doFirst { println "override" }
+
+task copyfile(type:Copy){
+    from 'src'
+    into 'dest'
+}
