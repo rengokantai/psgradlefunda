@@ -33,9 +33,19 @@ task copyfile(type:Copy){
 //version 2 NOT WORKING.
 def contentSpec = copySpec {
     exclude 'main'
-    from 'src'
+    from 'xml'
 }
 task copyfile2(type:Copy){
     with contentSpec
     into 'dest'
+}
+
+// x:"y" means replace $x in target file to y.
+task copyconfig(type:Copy){
+    include 'test.xml'
+    from 'xml'
+    into 'dest'
+    expand(
+        [x:"y"]
+    )
 }

@@ -50,3 +50,41 @@ shouldRnnAfter   #ignore circular dependency.
 
 ######
 a.finalizedBy b  // b must run after a
+
+#####Build a Java Project
+###### java plugin
+```
+gradle compileJave
+gradle classes
+```
+######gradle daemon
+run tasks faster
+```
+gradle --daemon build
+```
+or set in env .gradle, add file gradle.properties,edit
+```
+org.gradle.daemon=true
+```
+Not use:
+```
+gradle --no-daemon build
+```
+######multiple projects
+in top level,we create two files:  
+build.gradle:
+```
+allprojects{
+    apply plugin:'java'
+}
+project(':Proj1'){}
+project(':Proj2'){
+    dependencies{
+        compile project(':Proj1')
+    }
+}
+```
+settings.gradle:
+```
+include 'Proj1','Proj2'
+```
