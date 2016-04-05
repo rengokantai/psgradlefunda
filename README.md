@@ -88,3 +88,76 @@ settings.gradle:
 ```
 include 'Proj1','Proj2'
 ```
+######bring all together
+if the file structure is not canonical:
+```
+apply plugin : 'java'
+apply plugin : 'application'
+sourceSets{
+    main{
+        java{
+            srcDir 'src'
+        }
+    }
+    test{
+        java{
+            srcDir 'test/src'
+        }
+    }
+}
+repositories{
+    mavenCentral()
+}
+
+dependencies{
+    compile files ('libs/1.jar','lib/2.jar')
+    compile 'junit:junit:4.12'
+}
+run{
+    if(project.hasProperty('args')){
+        args project.args.split('\\s')
+    }
+}
+task wrapper(type:Wrapper)
+mainClassName = 'me.yd.Main'
+```
+```
+gradle wrapper
+```
+```
+gradlew build
+```
+
+pass args:
+```
+gradle run -Pargs="-f build.gradle -d build.main"
+```
+#####Dependencies
+######intro
+```
+gradle -q depenencies
+gradle -q dependencies -configuration compile
+```
+######using filters to select tests
+```
+test{
+    filter{
+        includeTestsMatching "me.yd.*"
+        includeTestsMatching "*start"
+    }
+}
+```
+Or,write in a custmized task
+```
+task customTest(type:Test){
+    dependsOn testClasses
+    filter{
+        includeTestsMatching "me.yd.*"
+        includeTestsMatching "*start"
+    }
+}
+```
+using command line to override
+```
+gradle test --tests *should
+```
